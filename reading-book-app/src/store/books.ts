@@ -21,7 +21,7 @@ export const useBookStore = create<State>()(
       },
       readingList: [],
       fetchBooks: async () => {
-        const response = await fetch('http://localhost:5174/books.json')
+        const response = await fetch('http://localhost:5173/books.json')
         const data = await response.json()
         const booksInfo = data.library.map(
           (item: { book: Book[] }) => item.book

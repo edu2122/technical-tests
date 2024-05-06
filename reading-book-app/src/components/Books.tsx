@@ -21,9 +21,6 @@ export function Books() {
   const { filterBooks } = useFilteredBooks()
   const filteredBooks = filterBooks(books)
 
-  if(filteredBooks.length )
-
-
   console.log(filteredBooks)
 
   return (
@@ -33,7 +30,7 @@ export function Books() {
         return (
           <Card
             key={book.ISBN}
-            className="group relative hover:shadow-xl hover:bg-zinc-500/15 shadow-lg rounded-md transition-all duration-300 animate-fade-up"
+            className="book group relative hover:shadow-xl hover:bg-zinc-500/15 shadow-lg rounded-md transition-all duration-300 animate-fade-up"
           >
             <CardHeader className="mb-8">
               <CardTitle className="break-normal whitespace-nowrap overflow-hidden text-ellipsis text-center">

@@ -13,7 +13,6 @@ export const useBooks = () => {
     return readingList.some((book) => book.ISBN === bookId)
   }
 
-
   return {
     availableBooks,
     readingListBooksAvailable,
