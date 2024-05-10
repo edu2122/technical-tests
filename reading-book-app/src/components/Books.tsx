@@ -33,7 +33,7 @@ export function Books() {
             className="book group relative hover:shadow-xl hover:bg-zinc-500/15 shadow-lg rounded-md transition-all duration-300 animate-fade-up"
           >
             <CardHeader className="mb-8">
-              <CardTitle className="break-normal whitespace-nowrap overflow-hidden text-ellipsis text-center">
+              <CardTitle className="book-title break-normal whitespace-nowrap overflow-hidden text-ellipsis text-center">
                 {book.title}
               </CardTitle>
             </CardHeader>
@@ -62,7 +62,7 @@ export function Books() {
               />
             </CardContent>
             <CardFooter>
-              <p className="text-pretty">{book.synopsis}</p>
+              <p className="book-description text-pretty">{book.synopsis}</p>
             </CardFooter>
           </Card>
         )
