@@ -12,16 +12,11 @@ import {
 } from '@/components/ui/card'
 import { BookMark } from '@/components/icons/BookMark.tsx'
 import { Button } from '@/components/ui/button'
-import { useFilteredBooks } from '@/hooks/useFilteredBooks'
 import { useBooks } from '@/hooks/useBooks'
 
 export function Books() {
-  const { books, addToReadingList, removeToReadingList } = useBookStore()
-  const { checkBookInReadingList } = useBooks()
-  const { filterBooks } = useFilteredBooks()
-  const filteredBooks = filterBooks(books)
-
-  console.log(filteredBooks)
+  const { addToReadingList, removeToReadingList } = useBookStore()
+  const { checkBookInReadingList, filteredBooks } = useBooks()
 
   return (
     <div className="books">

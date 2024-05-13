@@ -7,7 +7,6 @@ export const useFilteredBooks = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onChangeFilterPages = (event: any) => {
     const pages = event
-    console.log(pages)
     useBookStore.setState({ filters: { ...filters, pages } })
   }
 

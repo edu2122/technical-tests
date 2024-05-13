@@ -5,7 +5,7 @@ import { persist } from 'zustand/middleware'
 interface State {
   books: Book[]
   readingList: Book[]
-  fetchBooks: () => Promise<void>
+  fetchBooks: (search: string) => Promise<void>
   addToReadingList: (bookId: string) => void
   removeToReadingList: (bookId: string) => void
   filters: Filters
@@ -20,13 +20,17 @@ export const useBookStore = create<State>()(
         pages: 40
       },
       readingList: [],
-      fetchBooks: async () => {
+      fetchBooks: async (search: string) => {
         const response = await fetch('http://localhost:5173/books.json')
         const data = await response.json()
         const booksInfo = data.library.map(
           (item: { book: Book[] }) => item.book
         )
-        set({ books: booksInfo })
+        const searchBooks = booksInfo.filter((book: Book) =>
+          book.title.toLowerCase().includes(search.toLowerCase())
+        )
+
+        set({ books: searchBooks })
       },
       addToReadingList: (bookId: string) => {
         const { readingList, books } = get()
