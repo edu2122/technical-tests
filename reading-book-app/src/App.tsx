@@ -27,8 +27,6 @@ function App() {
             )}
           </div>
 
-          <div className="flex gap-2 justify-center items-center"></div>
-
           <div className="flex items-center gap-8">
             <SearchBook />
             <FilterByPage />

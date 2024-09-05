@@ -1,4 +1,3 @@
-/* eslint-disable multiline-ternary */
 import {
   Sheet,
   SheetContent,
@@ -22,11 +21,19 @@ import { useBookStore } from '@/store/books'
 import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
-import { type Book } from '../../types'
+import { type Book } from 'types'
 import { useBooks } from '@/hooks/useBooks'
 
 export function ReadingBookList() {
-  const { addToReadingList, readingList, removeToReadingList } = useBookStore()
+  const { addToReadingList } = useBookStore((state) => ({
+    addToReadingList: state.addToReadingList
+  }))
+  const { readingList } = useBookStore((state) => ({
+    readingList: state.readingList
+  }))
+  const { removeToReadingList } = useBookStore((state) => ({
+    removeToReadingList: state.removeToReadingList
+  }))
   const { checkBookInReadingList } = useBooks()
 
   return (
@@ -43,21 +50,21 @@ export function ReadingBookList() {
           <ScrollArea className="h-[840px] w-[350px] rounded-md p-4">
             <div className="books">
               {readingList.map((book: Book) => {
-                const isBookInReadingList = checkBookInReadingList(book.ISBN)
-
+                const { ISBN, title, genre, cover, synopsis } = book
+                const isBookInReadingList = checkBookInReadingList(ISBN)
                 return (
                   <Card
-                    key={book.ISBN}
+                    key={ISBN}
                     className="group relative hover:shadow-xl hover:bg-zinc-500/15 shadow-lg rounded-md transition-all duration-300"
                   >
                     <CardHeader className="mb-8">
                       <CardTitle className="break-normal whitespace-nowrap overflow-hidden text-ellipsis">
-                        {book.title}
+                        {title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="items-center justify-center">
                       <div className="flex items-center justify-between pb-4 gap-6">
-                        <Badge variant="outline">{book.genre}</Badge>
+                        <Badge variant="outline">{genre}</Badge>
                         <Button
                           name="add and remove from reading list"
                           variant={
@@ -65,8 +72,8 @@ export function ReadingBookList() {
                           }
                           onClick={() => {
                             isBookInReadingList
-                              ? removeToReadingList(book.ISBN)
-                              : addToReadingList(book.ISBN)
+                              ? removeToReadingList(ISBN)
+                              : addToReadingList(ISBN)
                           }}
                         >
                           <BookMark />
@@ -75,12 +82,12 @@ export function ReadingBookList() {
 
                       <img
                         className=" w-[265px] h-[350px]"
-                        src={book.cover}
-                        alt={book.title}
+                        src={cover}
+                        alt={title}
                       />
                     </CardContent>
                     <CardFooter>
-                      <p className="text-pretty">{book.synopsis}</p>
+                      <p className="text-pretty">{synopsis}</p>
                     </CardFooter>
                   </Card>
                 )

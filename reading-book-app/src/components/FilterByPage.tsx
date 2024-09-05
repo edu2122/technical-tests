@@ -3,6 +3,7 @@ import { useFilteredBooks } from '@/hooks/useFilteredBooks'
 
 export function FilterByPage() {
   const { filters, onChangeFilterPages } = useFilteredBooks()
+  const { pages } = filters
 
   return (
     <div className="flex flex-col justify-left items-left">
@@ -14,10 +15,10 @@ export function FilterByPage() {
           min={40}
           max={1000}
           className="w-[200px] flex focus:outline-none"
-          defaultValue={[filters.pages]} // Fix: Wrap the value in an array
+          defaultValue={[pages]} // Fix: Wrap the value in an array
         />
 
-        <span>{filters.pages}</span>
+        <span>{pages}</span>
       </div>
     </div>
   )

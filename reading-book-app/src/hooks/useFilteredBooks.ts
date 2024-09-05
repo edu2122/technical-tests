@@ -1,6 +1,6 @@
 // hooks/useFilteredBooks.js
 import { useBookStore } from '@/store/books'
-import { type Book } from '../../types' // Asumiendo que estos tipos están definidos en tus archivos de tipos
+import { type Book } from '../../types'
 
 export const useFilteredBooks = () => {
   const filters = useBookStore((state) => state.filters)

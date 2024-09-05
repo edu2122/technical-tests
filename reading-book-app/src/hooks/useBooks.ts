@@ -4,7 +4,9 @@ import { type Book } from 'types'
 import { useMemo } from 'react'
 
 export const useBooks = () => {
-  const { books, readingList, fetchBooks } = useBookStore()
+  const books = useBookStore((state) => state.books)
+  const readingList = useBookStore((state) => state.readingList)
+  const fetchBooks = useBookStore((state) => state.fetchBooks)
   const { filterBooks } = useFilteredBooks()
 
   const filteredBooks = filterBooks(books)
@@ -12,7 +14,9 @@ export const useBooks = () => {
     () =>
       filteredBooks.filter(
         (book: Book) =>
-          !readingList.some((readingBook) => readingBook.ISBN === book.ISBN)
+          !readingList.some(
+            (bookInReadingList) => bookInReadingList.ISBN === book.ISBN
+          )
       ),
     [filteredBooks, readingList]
   )

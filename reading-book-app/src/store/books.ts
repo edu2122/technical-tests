@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware'
 
 interface State {
   books: Book[]
+  search: string
   readingList: Book[]
   fetchBooks: (search: string) => Promise<void>
   addToReadingList: (bookId: string) => void
@@ -14,6 +15,7 @@ interface State {
 export const useBookStore = create<State>()(
   persist(
     (set, get) => ({
+      search: '',
       books: [],
       filters: {
         genre: 'All',
@@ -21,16 +23,21 @@ export const useBookStore = create<State>()(
       },
       readingList: [],
       fetchBooks: async (search: string) => {
-        const response = await fetch('http://localhost:5173/books.json')
-        const data = await response.json()
-        const booksInfo = data.library.map(
-          (item: { book: Book[] }) => item.book
-        )
-        const searchBooks = booksInfo.filter((book: Book) =>
-          book.title.toLowerCase().includes(search.toLowerCase())
-        )
+        try {
+          const response = await fetch('http://localhost:5173/books.json')
+          const data = await response.json()
+          const booksInfo = data.library.map(
+            (item: { book: Book[] }) => item.book
+          )
+          if (search === '') return set({ books: booksInfo })
+          const searchBooks = booksInfo.filter((book: Book) =>
+            book.title.toLowerCase().includes(search.toLowerCase())
+          )
 
-        set({ books: searchBooks })
+          set({ books: searchBooks })
+        } catch (error) {
+          throw new Error(`Error fetching books: ${error}`)
+        }
       },
       addToReadingList: (bookId: string) => {
         const { readingList, books } = get()
@@ -38,10 +45,10 @@ export const useBookStore = create<State>()(
         const index = readingList.findIndex((book) => book.ISBN === bookId)
         if (index === -1) {
           // El libro no está en la lista de lectura, lo añadimos
-          const bookToAdd = books.find((book) => book.ISBN === bookId)
+          const addBookToReadingList = books.find((book) => book.ISBN === bookId)
 
-          if (bookToAdd) {
-            set({ readingList: [...readingList, bookToAdd] })
+          if (addBookToReadingList) {
+            set({ readingList: [...readingList, addBookToReadingList] })
           }
         }
       },

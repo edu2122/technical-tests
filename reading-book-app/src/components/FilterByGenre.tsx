@@ -11,11 +11,11 @@ import { useFilteredBooks } from '@/hooks/useFilteredBooks'
 
 export function FilterByGenre() {
   const { onChangeFilterGenre, filters } = useFilteredBooks()
-
+  const { genre } = filters
   return (
     <Select onValueChange={onChangeFilterGenre}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder={filters.genre} />
+        <SelectValue placeholder={genre} />
       </SelectTrigger>
       <SelectContent>
         {genresList.map((genre) => (
