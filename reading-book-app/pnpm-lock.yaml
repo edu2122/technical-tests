@@ -54,14 +54,17 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@3.4.3)
       tailwindcss-animated:
-        specifier: ^1.0.1
+        specifier: 1.0.1
         version: 1.0.1(tailwindcss@3.4.3)
+      use-debounce:
+        specifier: ^10.0.3
+        version: 10.0.3(react@18.2.0)
       zustand:
         specifier: 4.5.2
         version: 4.5.2(@types/react@18.2.66)(react@18.2.0)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.43.1
+        specifier: 1.43.1
         version: 1.43.1
       '@types/node':
         specifier: 20.12.7
@@ -1361,6 +1364,12 @@ packages:
       '@types/react':
         optional: true
 
+  use-debounce@10.0.3:
+    resolution: {integrity: sha512-DxQSI9ZKso689WM1mjgGU3ozcxU1TJElBJ3X6S4SMzMNcm2lVH0AHmyXB+K7ewjz2BSUKJTDqTcwtSMRfB89dg==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
+
   use-sidecar@1.1.2:
     resolution: {integrity: sha512-epTbsLuzZ7lPClpz2TyryBfztm7m+28DlEv2ZCQ3MDr5ssiwyOwGH/e5F9CkfWjJ1t4clvI58yF822/GUkjjhw==}
     engines: {node: '>=10'}
@@ -2622,6 +2631,10 @@ snapshots:
       tslib: 2.6.2
     optionalDependencies:
       '@types/react': 18.2.66
+
+  use-debounce@10.0.3(react@18.2.0):
+    dependencies:
+      react: 18.2.0
 
   use-sidecar@1.1.2(@types/react@18.2.66)(react@18.2.0):
     dependencies:

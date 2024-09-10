@@ -26,6 +26,7 @@
     "tailwind-merge": "2.2.2",
     "tailwindcss-animate": "1.0.7",
     "tailwindcss-animated": "1.0.1",
+    "use-debounce": "^10.0.3",
     "zustand": "4.5.2"
   },
   "devDependencies": {

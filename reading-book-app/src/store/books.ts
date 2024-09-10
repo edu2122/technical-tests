@@ -45,7 +45,9 @@ export const useBookStore = create<State>()(
         const index = readingList.findIndex((book) => book.ISBN === bookId)
         if (index === -1) {
           // El libro no está en la lista de lectura, lo añadimos
-          const addBookToReadingList = books.find((book) => book.ISBN === bookId)
+          const addBookToReadingList = books.find(
+            (book) => book.ISBN === bookId
+          )
 
           if (addBookToReadingList) {
             set({ readingList: [...readingList, addBookToReadingList] })
